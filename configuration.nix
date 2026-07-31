@@ -125,6 +125,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable nix-ld
+  programs.nix-ld = {
+      enable = true;
+      # 基础库，Zed 的 LSP 常用
+      libraries = with pkgs; [
+        zlib zstd stdenv.cc.cc curl openssl
+        libssh bzip2 libxml2 acl libsodium
+        util-linux xz systemd
+      ];
+    };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
