@@ -3,10 +3,9 @@
 {
   home.username = "camuss";
   home.homeDirectory = "/home/camuss";
-  home.stateVersion = "26.05";
-
+  home.stateVersion = "26.05"
+  imports = [
+      ./home-modules    # 自动读 default.nix，一次性导入所有子模块
+  ];
   programs.home-manager.enable = true;
-
-  # 在这里添加你的包、程序配置...
-  home.packages = with pkgs; [ ];
 }

@@ -31,7 +31,7 @@
   };
   # Configure binary cache
   nix.settings = {
-    substituters = [ 
+    substituters = [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
     ];
@@ -112,8 +112,6 @@
     description = "Camuss";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
     ];
   };
 
@@ -134,14 +132,6 @@
      neovim
      wget
      curl
-     git
-     wezterm
-     eza
-     zoxide
-     fzf
-     bat
-     fd 
-     zed-editor
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
