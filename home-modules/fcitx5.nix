@@ -3,6 +3,6 @@
   xdg.configFile."fcitx5/rime" = {
     source = "${pkgs.rime-ice}/share/rime-data";
     recursive = true;
-    # force = true;  # 覆盖可能存在的旧配置
+    force = true; # 覆盖可能存在的旧配置
   };
 }
