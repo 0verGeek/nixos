@@ -1,5 +1,6 @@
 {
   imports = [
+    ./fcitx5.nix
     ./shell.nix
     ./git.nix
     ./lsp.nix
