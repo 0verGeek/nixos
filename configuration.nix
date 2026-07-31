@@ -5,7 +5,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -81,8 +80,11 @@
     fcitx5.addons = with pkgs; [
       qt6Packages.fcitx5-configtool
       qt6Packages.fcitx5-chinese-addons
-      fcitx5-rime
-      rime-ice
+      (fcitx5-rime.override {
+        rimeDataPkgs = [
+          pkgs.rime-wanxiang
+        ];
+      }) # 注入词库
     ];
   };
 
