@@ -1,8 +1,10 @@
-[
-  ./shell.nix
-  ./git.nix
-  ./lsp.nix
-  ./editor.nix
-  ./terminal.nix
-  ./packages.nix
-]
+{
+  imports = [
+    ./shell.nix
+    ./git.nix
+    ./lsp.nix
+    ./editor.nix
+    ./terminal.nix
+    ./packages.nix
+  ];
+}

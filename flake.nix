@@ -10,22 +10,31 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.default
-                  {
-                    home-manager = {
-                      useGlobalPkgs = true;
-                      useUserPackages = true;
-                      extraSpecialArgs = { inherit inputs; }; #If you want access to inputs in your home.nix
-                      users.camuss = ./home.nix; # replace <USERNAME> with your actual username
-                    };
-                  }
-      ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              extraSpecialArgs = { inherit inputs; }; # If you want access to inputs in your home.nix
+              users.camuss = ./home.nix; # replace <USERNAME> with your actual username
+            };
+          }
+        ];
+      };
     };
-  };
 }

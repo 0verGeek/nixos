@@ -2,13 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib,  ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -23,7 +28,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # Enable networking
   networking.networkmanager.enable = true;
-  programs.clash-verge ={
+  programs.clash-verge = {
     enable = true;
     serviceMode = true;
     tunMode = false;
@@ -35,7 +40,10 @@
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
     ];
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # Configure Bluetooth
@@ -62,7 +70,7 @@
   i18n.inputMethod = {
     type = "fcitx5";
     enable = true;
-    fcitx5.addons = with pkgs;[
+    fcitx5.addons = with pkgs; [
       qt6Packages.fcitx5-configtool
       qt6Packages.fcitx5-chinese-addons
       fcitx5-rime
@@ -110,14 +118,16 @@
   users.users."camuss" = {
     isNormalUser = true;
     description = "Camuss";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
     ];
   };
 
   # Configure default shell
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -127,22 +137,32 @@
 
   # Enable nix-ld
   programs.nix-ld = {
-      enable = true;
-      # 基础库，Zed 的 LSP 常用
-      libraries = with pkgs; [
-        zlib zstd stdenv.cc.cc curl openssl
-        libssh bzip2 libxml2 acl libsodium
-        util-linux xz systemd
-      ];
-    };
+    enable = true;
+    # 基础库，Zed 的 LSP 常用
+    libraries = with pkgs; [
+      zlib
+      zstd
+      stdenv.cc.cc
+      curl
+      openssl
+      libssh
+      bzip2
+      libxml2
+      acl
+      libsodium
+      util-linux
+      xz
+      systemd
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     neovim
-     wget
-     curl
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
+    wget
+    curl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
