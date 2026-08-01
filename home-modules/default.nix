@@ -1,6 +1,6 @@
 {
   imports = [
-    ./niri.nix
+    ./niri
     ./noctalia.nix
     ./rime.nix
     ./shell.nix
@@ -8,6 +8,7 @@
     ./lsp.nix
     ./editor.nix
     ./terminal.nix
+    ./llm-agent.nix
     ./packages.nix
   ];
 }

@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  # xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
+  xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
   programs.fuzzel.enable = true; # Super+D in the default setting (app launcher)
   programs.swaylock.enable = true; # Super+Alt+L in the default setting (screen locker)
   services.mako.enable = true; # notification daemon

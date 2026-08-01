@@ -12,6 +12,7 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
     };
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -21,6 +22,7 @@
       nixpkgs-unstable,
       home-manager,
       noctalia,
+      llm-agents,
       ...
     }@inputs:
     {

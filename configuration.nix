@@ -158,9 +158,38 @@
     enable = true;
     # 基础库，Zed 的 LSP 常用
     libraries = with pkgs; [
+      libX11
+      libsoup_3
+      glib-networking
+      gsettings-desktop-schemas
+      libglibutil
+      librsvg
+      libappindicator-gtk3
+      libnotify
+      dbus-glib
+      atk
+      at-spi2-atk
+      pcre
+      libxkbcommon
+      glib
+      gtk3
+      pango
+      cairo
+      gdk-pixbuf
+      libXcursor
+      fuse
       zlib
+      freetype
+      libxcb
+      expat
+      harfbuzz
+      libgpg-error
+      libGL
+      gnutls
       zstd
       stdenv.cc.cc
+      fontconfig
+      alsa-lib
       curl
       openssl
       libssh
@@ -171,6 +200,7 @@
       util-linux
       xz
       systemd
+      fontconfig
     ];
   };
 
