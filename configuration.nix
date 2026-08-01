@@ -55,6 +55,11 @@
 
   # Configure Bluetooth
   hardware.bluetooth.enable = true;
+  # 启用 OpenGL 驱动（对所有 Wayland 合成器都必需，不只是 niri）
+  hardware.graphics.enable = true;
+  # 电源 & 性能调优
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
@@ -95,6 +100,8 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  # Enable niri
+  programs.niri.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -131,6 +138,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "inputs"
     ];
     packages = with pkgs; [
     ];
@@ -173,6 +181,7 @@
     neovim
     wget
     curl
+    xwayland-satellite
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

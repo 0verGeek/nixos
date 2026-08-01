@@ -5,7 +5,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # 用 Antidote 替代 oh-my-zsh
     antidote = {
       enable = true;
       plugins = [
