@@ -1,6 +1,7 @@
 {
   imports = [
     ./niri.nix
+    ./noctalia.nix
     ./rime.nix
     ./shell.nix
     ./git.nix
