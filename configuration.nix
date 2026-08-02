@@ -218,7 +218,6 @@
     neovim
     wget
     curl
-    daed
     xwayland-satellite
     gcc
     clang

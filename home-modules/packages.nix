@@ -3,6 +3,5 @@
     hugo
     gearlever
     font-manager
-    # kdePackages.dolphin
   ];
 }

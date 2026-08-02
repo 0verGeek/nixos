@@ -1,18 +1,17 @@
 { ... }: {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    enableCompletion = false;
 
     antidote = {
       enable = true;
       plugins = [
+        "jeffreytse/zsh-vi-mode"
+        ""
         "zsh-users/zsh-autosuggestions"
         "zsh-users/zsh-syntax-highlighting"
-        "ohmyzsh/ohmyzsh path:lib/git.zsh"
-        "ohmyzsh/ohmyzsh path:plugins/docker"
-        "ohmyzsh/ohmyzsh path:plugins/extract"
+        # "ohmyzsh/ohmyzsh path:lib/git.zsh"
+        # "ohmyzsh/ohmyzsh path:plugins/extract"
       ];
     };
     shellAliases = {
@@ -21,11 +20,15 @@
       update = "sudo nixos-rebuild switch";
     };
 
-    history.size = 10000;
+    history.size = 1000;
     history.ignoreAllDups = true;
-    initContent = ''
 
-    '';
+    # initExtraFirst = ''
+    #   zmodload zsh/zprof
+    # '';
+    # initExtra = ''
+    #   zprof
+    # '';
   };
   programs.starship = {
     enable = true;
