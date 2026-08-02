@@ -68,6 +68,9 @@
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
+  # Enable Zsh
+  programs.zsh.enable = true;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
 
