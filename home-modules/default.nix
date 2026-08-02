@@ -4,8 +4,9 @@
     ./noctalia.nix
     ./rime.nix
     ./shell.nix
+    ./font.nix
     ./git.nix
-    ./lsp.nix
+    ./dev.nix
     ./editor.nix
     ./terminal.nix
     ./llm-agent.nix

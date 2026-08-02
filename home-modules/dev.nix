@@ -1,9 +1,13 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    rust-analyzer
+
+    cmake
+    rustup
+    uv
+
+    # LSP
     nil
     nixd
     pyright
-    clang-tools
   ];
 }

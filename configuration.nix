@@ -35,11 +35,15 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # Enable networking
   networking.networkmanager.enable = true;
-  programs.clash-verge = {
+  # programs.clash-verge = {
+  #   enable = true;
+  #   serviceMode = true;
+  #   tunMode = true;
+  #   autoStart = true;
+  # };
+  services.dae = {
     enable = true;
-    serviceMode = true;
-    tunMode = false;
-    autoStart = true;
+    configFile = "/etc/dae/config.dae";
   };
   # Configure binary cache
   nix.settings = {
@@ -140,6 +144,7 @@
       "wheel"
       "inputs"
     ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     ];
   };
@@ -160,18 +165,17 @@
     libraries = with pkgs; [
       libX11
       libsoup_3
-      glib-networking
+      # glib-networking
       gsettings-desktop-schemas
       libglibutil
       librsvg
       libappindicator-gtk3
       libnotify
-      dbus-glib
+      # dbus-glib
       atk
       at-spi2-atk
       pcre
       libxkbcommon
-      glib
       gtk3
       pango
       cairo
@@ -211,7 +215,10 @@
     neovim
     wget
     curl
+    daed
     xwayland-satellite
+    gcc
+    clang
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
