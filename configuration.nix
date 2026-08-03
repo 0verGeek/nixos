@@ -5,6 +5,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -43,6 +44,7 @@
   # };
   services.dae = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.dae;
     configFile = "/etc/dae/config.dae";
   };
   # Configure binary cache
@@ -152,9 +154,6 @@
     ];
   };
 
-  # Configure default shell
-  # users.defaultUserShell = pkgs.zsh;
-
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -219,6 +218,7 @@
     wget
     curl
     xwayland-satellite
+    hicolor-icon-theme
     gcc
     clang
   ];

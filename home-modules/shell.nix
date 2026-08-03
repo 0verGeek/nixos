@@ -7,7 +7,11 @@
       enable = true;
       plugins = [
         "jeffreytse/zsh-vi-mode"
-        ""
+        "romkatv/zsh-bench kind:path"
+        "mattmc3/ez-compinit"
+        "zsh-users/zsh-completions kind:fpath path:src"
+        "Aloxaf/fzf-tab"
+        "zsh-users/zsh-history-substring-search"
         "zsh-users/zsh-autosuggestions"
         "zsh-users/zsh-syntax-highlighting"
         # "ohmyzsh/ohmyzsh path:lib/git.zsh"
