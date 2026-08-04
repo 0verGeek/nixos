@@ -8,6 +8,6 @@
     tree-sitter
     adw-gtk3
     nwg-look
-    kdePackages.qt6ct
+    glib
   ];
 }

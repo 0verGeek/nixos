@@ -2,6 +2,7 @@
   imports = [
     ./niri
     ./noctalia.nix
+    ./theme.nix
     ./rime.nix
     ./shell.nix
     ./font.nix
