@@ -1,0 +1,38 @@
+{ self, ... }: {
+  flake.modules.nixos.hardware_desktop =
+    {
+      config,
+      lib,
+      modulesPath,
+      ...
+    }:
+
+    {
+      imports = [
+        (modulesPath + "/installer/scan/not-detected.nix")
+      ];
+
+      boot.initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-intel" ];
+      boot.extraModulePackages = [ ];
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/7cff321d-5143-4152-87df-a4d72129c016";
+        fsType = "ext4";
+      };
+
+      swapDevices = [
+        { device = "/dev/disk/by-uuid/bf6620cb-23d3-497b-858f-49c7c9c6d514"; }
+      ];
+
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+      hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    };
+}
