@@ -31,11 +31,12 @@
     dae
     firewall
     network
-    nix-gc
     nix-settings
     nix-ld
     nixpkgs
+    nh
     packages
+    appimages
     pipewire
     power
     print

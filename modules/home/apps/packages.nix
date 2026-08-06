@@ -2,7 +2,6 @@
   flake.modules.homeManager.packages = { pkgs, ... }: {
     home.packages = with pkgs; [
       hugo
-      gearlever
       font-manager
       fd
       ripgrep

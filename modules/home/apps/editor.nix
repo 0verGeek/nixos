@@ -7,6 +7,7 @@
       vscode
       zed-editor
       kdePackages.kate
+      obsidian
     ];
   };
 }

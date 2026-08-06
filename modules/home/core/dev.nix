@@ -6,9 +6,14 @@
       rustup
       uv
       unzip
+      nodejs
+      lazygit
+      python3
       # LSP
       nil
       nixd
+      nixfmt
+      statix
       pyright
       lua-language-server
     ];
