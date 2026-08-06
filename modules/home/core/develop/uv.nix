@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.uv = {
+  flake.modules.homeManager.uv = {
     programs.uv = {
       enable = true;
       python = {

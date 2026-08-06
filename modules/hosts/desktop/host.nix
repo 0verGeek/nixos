@@ -29,7 +29,6 @@
     chinese
     fcitx5
     dae
-    firewall
     network
     nix-settings
     nix-ld

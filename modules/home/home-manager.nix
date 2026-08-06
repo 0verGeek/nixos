@@ -11,6 +11,7 @@
         home.stateVersion = "26.05";
         imports = with self.modules.homeManager; [
           dev
+          uv
           fonts
           git
           llm-agent

@@ -10,8 +10,6 @@
         "inputs"
       ];
       shell = pkgs.zsh;
-      packages = with pkgs; [
-      ];
     };
     system.stateVersion = "26.05";
   };
