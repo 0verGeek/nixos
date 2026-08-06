@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.dev = { pkgs, ... }: {
+  flake.modules.homeManager.dev-tools = { pkgs, ... }: {
     home.packages = with pkgs; [
       gnumake
       cmake

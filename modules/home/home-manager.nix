@@ -10,19 +10,20 @@
         home.homeDirectory = "/home/camuss";
         home.stateVersion = "26.05";
         imports = with self.modules.homeManager; [
-          dev
-          uv
+          dev-tools
+          dev-llm
+          dev-python
           fonts
           git
-          llm-agent
           rime
-          shell
+          zsh
+          shell-tools
           wezterm
           theme
           niri
           noctalia
-          editor
-          packages
+          editors
+          misc
         ];
         programs.home-manager.enable = true;
       };

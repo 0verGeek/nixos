@@ -24,22 +24,18 @@
     niri
     X11
     xdg
-    bluetooth
-    graphics
+    hardware
     chinese
     fcitx5
     dae
     network
-    nix-settings
+    nix
     nix-ld
-    nixpkgs
     nh
     packages
     appimages
     pipewire
-    power
-    print
-    shell_zsh
+    services
     user_camuss
     home-manager
   ];

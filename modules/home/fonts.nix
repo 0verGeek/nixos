@@ -1,6 +1,5 @@
 {
   flake.modules.homeManager.fonts = { pkgs, ... }: {
-    # 用户级字体配置
     home.packages = with pkgs; [
       sarasa-gothic
       lxgw-wenkai-screen
