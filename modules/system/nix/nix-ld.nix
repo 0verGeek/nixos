@@ -5,6 +5,7 @@
       enable = true;
       # 基础库，Zed 的 LSP 常用
       libraries = with pkgs; [
+        libsecret
         libX11
         libsoup_3
         # glib-networking

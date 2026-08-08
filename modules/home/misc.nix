@@ -7,6 +7,8 @@
       ripgrep
       tree-sitter
       glib
+      libsecret
+      fastfetch
     ];
   };
 }

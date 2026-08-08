@@ -310,8 +310,8 @@ animations {
 }
 
 blur {
-  passes 3
-  offset 3.0
+  passes 4
+  offset 4.0
   noise 0.02
   saturation 1.5
 
@@ -366,7 +366,7 @@ layer-rule {
   match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
   background-effect {
     xray false
-    // blur false
+    blur false
   }
 }
 
