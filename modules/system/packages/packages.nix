@@ -7,6 +7,8 @@
       xwayland-satellite
       gcc
       clang
+      dmg2img
+      libinput
     ];
   };
 }

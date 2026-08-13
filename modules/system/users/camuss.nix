@@ -7,7 +7,9 @@
       extraGroups = [
         "networkmanager"
         "wheel"
-        "inputs"
+        "input"
+        "kvm"
+        "libvirtd"
       ];
       shell = pkgs.zsh;
     };

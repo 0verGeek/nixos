@@ -9,11 +9,12 @@
         addons = with pkgs; [
           qt6Packages.fcitx5-configtool
           qt6Packages.fcitx5-chinese-addons
-          (fcitx5-rime.override {
-            rimeDataPkgs = [
-              pkgs.rime-ice
-            ];
-          }) # 注入词库
+          fcitx5-rime
+          # (fcitx5-rime.override {
+            # rimeDataPkgs = [
+              # pkgs.rime-ice
+            # ];
+          # }) # 注入词库
         ];
       };
     };

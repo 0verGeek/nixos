@@ -11,6 +11,10 @@
     };
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    codewhale = {
+      url = "github:Hmbown/CodeWhale";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

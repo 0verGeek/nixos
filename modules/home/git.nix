@@ -6,7 +6,7 @@
         name = "0verGeek";
         email = "3298866863@qq.com";
       };
-      extraConfig = {
+      settings = {
         credential = {
           helper = "libsecret";
         };
