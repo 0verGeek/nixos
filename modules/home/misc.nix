@@ -9,6 +9,8 @@
       glib
       libsecret
       fastfetch
+      folo
+      google-chrome
     ];
   };
 }

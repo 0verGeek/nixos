@@ -11,11 +11,14 @@
         home.stateVersion = "26.05";
         imports = with self.modules.homeManager; [
           dev-tools
+          direnv
           dev-llm
           dev-python
           fonts
+          env
           git
           # rime
+          dsh
           zsh
           shell-tools
           wezterm

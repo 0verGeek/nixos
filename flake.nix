@@ -10,11 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    codewhale = {
-      url = "github:Hmbown/CodeWhale";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    llm-agents.url = "github:Qumulo/llm-agents";
+    deepseek-harness.url = "github:moraxyc/deepseek-harness.nix";
   };
 
   outputs =
@@ -41,11 +38,7 @@
       ];
       perSystem =
         {
-          config,
-          self',
-          inputs',
           pkgs,
-          system,
           ...
         }:
         {

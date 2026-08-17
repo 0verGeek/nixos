@@ -1,11 +1,10 @@
 {
-  flake.modules.homeManager.dev-llm = { inputs, pkgs, codewhale, ... }: {
+  flake.modules.homeManager.dev-llm = { inputs, pkgs, ... }: {
     home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       claude-code
       cc-switch-cli
-      hermes-desktop
-
+      hermes-one
+      hermes-agent
     ];
-    environment.systemPackages = [ codewhale.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   };
 }
