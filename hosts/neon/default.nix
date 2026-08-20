@@ -10,13 +10,15 @@
       hostname = "neon";
     };
     modules = [
-      # core:所有主机共享的组合
+      # ── core:所有主机共享的组合 ──
       self.modules.nixos.core
-      # 本机差异 = 按需 import(niri 是跨系统/home 的特性单元)
-      self.modules.nixos.hardware-neon
+      # ── hardware ──
+      self.modules.nixos.neon
+      # ── desktop(niri 是跨系统/home 的特性单元)──
       self.modules.nixos.niri
+      # ── host glue ──
       self.modules.nixos.hm-neon
-      # boot 在 core 中,这里只选择引导器(Conditional aspect)
+      # ── boot:core 共享导入,这里只选择引导器(Conditional aspect)──
       {
         myNixos.boot = {
           loader = "grub";

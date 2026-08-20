@@ -10,11 +10,13 @@
         home.homeDirectory = "/home/camuss";
         home.stateVersion = "26.05";
         imports = with self.modules.homeManager; [
+          # core:共享组合
           core
-          # 本机差异 = 按需 import
-          dev-direnv
-          dev-dsh
-          env
+          # ── development ──
+          direnv
+          dsh
+          # ── environment ──
+          session
         ];
         programs.home-manager.enable = true;
       };

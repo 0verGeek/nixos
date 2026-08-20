@@ -10,14 +10,17 @@
       hostname = "radon";
     };
     modules = [
-      # core:所有主机共享的组合
+      # ── core:所有主机共享的组合 ──
       self.modules.nixos.core
-      # 本机差异 = 按需 import
-      self.modules.nixos.hardware-radon
-      self.modules.nixos.hardware-gpu-nvidia
-      self.modules.nixos.services-libvirtd
+      # ── hardware ──
+      self.modules.nixos.radon
+      self.modules.nixos.gpu-nvidia
+      # ── services / virtualisation ──
+      self.modules.nixos.libvirtd
+      self.modules.nixos.virt-manager
+      # ── host glue ──
       self.modules.nixos.hm-radon
-      # boot 在 core 中,这里只选择引导器(Conditional aspect)
+      # ── boot:core 共享导入,这里只选择引导器(Conditional aspect)──
       { myNixos.boot.loader = "systemd-boot"; }
       inputs.home-manager.nixosModules.home-manager
     ];

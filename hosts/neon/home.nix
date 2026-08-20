@@ -10,11 +10,14 @@
         home.homeDirectory = "/home/camuss";
         home.stateVersion = "26.05";
         imports = with self.modules.homeManager; [
+          # core:共享组合
           core
-          # 本机差异 = 按需 import(niri 已由系统侧特性模块经桥注入,不在此重复)
-          desktop-noctalia
-          desktop-rime
-          desktop-theme
+          # ── desktop ──
+          noctalia
+          theme
+          # ── input-method ──
+          rime
+          # (niri 已由系统侧特性模块经桥注入,不在此重复)
         ];
         programs.home-manager.enable = true;
       };
