@@ -1,0 +1,11 @@
+{
+  flake.modules.nixos.services-printing = { pkgs, ... }: {
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [
+        gutenprint
+        hplip
+      ];
+    };
+  };
+}

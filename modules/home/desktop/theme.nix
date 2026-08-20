@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.theme = { pkgs, ... }: {
+  flake.modules.homeManager.desktop-theme = { pkgs, ... }: {
     home.packages = with pkgs; [
       papirus-icon-theme
       hicolor-icon-theme

@@ -1,11 +1,6 @@
 {
-  flake.modules.homeManager.dsh =
-    {
-      inputs,
-      pkgs,
-      config,
-      ...
-    }:
+  flake.modules.homeManager.dev-dsh =
+    { inputs, pkgs, ... }:
     {
       imports = [ inputs.deepseek-harness.homeModules.default ];
 
@@ -18,9 +13,10 @@
           mode = "managed"; # 或 "mutable"
         };
 
-        # 设置默认 profile
-        defaultProfile = "nix-tui";
+        # 不设默认 profile:裸 dsh 走官方内置 profile(web/headless),
+        # TUI 用 `dsh --profile nix-tui` 启动
+        defaultProfile = null;
       };
-      # services.dsh.enable = true;
+      services.dsh.enable = true;
     };
 }

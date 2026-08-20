@@ -12,39 +12,36 @@ let
 in
 {
   dsh = prev.dsh.overrideScope (
-    self: super:
-    {
+    self: super: {
       bundles = super.bundles // {
-        tui = super.bundles.tui.overrideAttrs (
-          old: {
-            postInstall = ''
-              bundleRoot="$out/lib/node_modules"
-              kernelNM="${super.dsh-kernel}/lib/deepseek-harness/node_modules"
+        tui = super.bundles.tui.overrideAttrs (old: {
+          postInstall = ''
+            bundleRoot="$out/lib/node_modules"
+            kernelNM="${super.dsh-kernel}/lib/deepseek-harness/node_modules"
 
-              # 仅对 kernel 持有的 @deepseek-ai/* 包做版本锁定,第三方依赖不动
-              for entry in "$kernelNM"/@deepseek-ai/*; do
-                [ -d "$entry" ] || continue
-                pkg="@deepseek-ai/$(basename "$entry")"
+            # 仅对 kernel 持有的 @deepseek-ai/* 包做版本锁定,第三方依赖不动
+            for entry in "$kernelNM"/@deepseek-ai/*; do
+              [ -d "$entry" ] || continue
+              pkg="@deepseek-ai/$(basename "$entry")"
 
-                rm -rf "$bundleRoot/$pkg"
-                find "$bundleRoot" -depth \( -type d -o -type l \) \
-                  -path "*/node_modules/$pkg" -exec rm -rf {} + 2>/dev/null || true
+              rm -rf "$bundleRoot/$pkg"
+              find "$bundleRoot" -depth \( -type d -o -type l \) \
+                -path "*/node_modules/$pkg" -exec rm -rf {} + 2>/dev/null || true
 
-                mkdir -p "$bundleRoot/@deepseek-ai"
-                ln -s "$kernelNM/$pkg" "$bundleRoot/$pkg"
-              done
+              mkdir -p "$bundleRoot/@deepseek-ai"
+              ln -s "$kernelNM/$pkg" "$bundleRoot/$pkg"
+            done
 
-              # 清理悬空软链(如 .bin 中的失效项)
-              find "$bundleRoot" -depth -type l ! -exec test -e {} \; -delete 2>/dev/null || true
+            # 清理悬空软链(如 .bin 中的失效项)
+            find "$bundleRoot" -depth -type l ! -exec test -e {} \; -delete 2>/dev/null || true
 
-              # 重新生成 bundle manifest(替代上游的 validateInstalledBundle)
-              mkdir -p "$out/nix-support"
-              ${getExe super.buildDshBundle.dshBundleResolver} manifest \
-                "$out/nix-support/dsh-bundles.json" \
-                "$bundleRoot"
-            '';
-          }
-        );
+            # 重新生成 bundle manifest(替代上游的 validateInstalledBundle)
+            mkdir -p "$out/nix-support"
+            ${getExe super.buildDshBundle.dshBundleResolver} manifest \
+              "$out/nix-support/dsh-bundles.json" \
+              "$bundleRoot"
+          '';
+        });
       };
     }
   );

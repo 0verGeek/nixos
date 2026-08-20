@@ -1,0 +1,14 @@
+# 特性:niri(用户侧)。与 nixos.nix 同属一个特性单元,主机按需 import。
+{
+  flake.modules.homeManager.niri = { pkgs, ... }: {
+    xdg.configFile."niri/config.kdl".source = ./config.kdl;
+    programs.fuzzel.enable = true; # Super+D in the default setting (app launcher)
+    programs.swaylock.enable = true; # Super+Alt+L in the default setting (screen locker)
+    services.mako.enable = true; # notification daemon
+    services.swayidle.enable = true; # idle management daemon
+    services.polkit-gnome.enable = true; # polkit
+    home.packages = with pkgs; [
+      swaybg # wallpaper
+    ];
+  };
+}

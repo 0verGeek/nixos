@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zsh = {
+  flake.modules.homeManager.shell-zsh = {
     programs = {
       zsh = {
         enable = true;
