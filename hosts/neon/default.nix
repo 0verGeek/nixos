@@ -18,13 +18,9 @@
       self.modules.nixos.niri
       # ── host glue ──
       self.modules.nixos.hm-neon
-      # ── boot:core 共享导入,这里只选择引导器(Conditional aspect)──
-      {
-        myNixos.boot = {
-          loader = "grub";
-          device = "/dev/sda";
-        };
-      }
+      # ── boot:主机直接选择引导器 ──
+      self.modules.nixos.grub
+      { boot.loader.grub.device = "/dev/sda"; }
       inputs.home-manager.nixosModules.home-manager
     ];
   };

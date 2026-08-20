@@ -50,7 +50,8 @@ modules/
 │   ├── nixos.nix                 # 系统侧共享组合 → nixos.core
 │   └── home.nix                  # 用户侧共享组合 → homeManager.core
 ├── boot/
-│   └── loader.nix                # 引导器 + 内核选择(myNixos.boot) → nixos.loader
+│   ├── systemd-boot.nix          # radon 用 → nixos.systemd-boot(含 latest 内核)
+│   └── grub.nix                  # neon 用 → nixos.grub(设备由主机内联指定)
 ├── desktop/
 │   ├── kde.nix                   # KDE: sddm+plasma6+X11 → nixos.kde(单侧单元,平铺)
 │   ├── niri/
@@ -94,7 +95,7 @@ modules/
 
 | 现 attr | 新 attr |
 |---|---|
-| `boot` | `loader`(含内核选择,审阅后撤销拆分) |
+| `boot` | `systemd-boot` / `grub`(无 option 机制,主机直接 import) |
 | `desktop-plasma` + `desktop-x11` | `kde`(合并) |
 | `desktop-xdg` | `xdg` |
 | `niri` | `niri`(不变,移到 desktop/) |
@@ -164,8 +165,6 @@ modules/
 { self, ... }: {
   flake.modules.nixos.core = {
     imports = with self.modules.nixos; [
-      # boot
-      loader
       # desktop
       kde xdg
       # environment
@@ -223,8 +222,9 @@ modules/
     # desktop
     self.modules.nixos.niri
     self.modules.nixos.hm-neon
-    # boot
-    { myNixos.boot = { loader = "grub"; device = "/dev/sda"; }; }
+    # boot(主机直接选择引导器)
+    self.modules.nixos.grub
+    { boot.loader.grub.device = "/dev/sda"; }
     inputs.home-manager.nixosModules.home-manager
   ];
   ```
@@ -239,8 +239,8 @@ modules/
     # services / virtualisation
     self.modules.nixos.libvirtd
     self.modules.nixos.hm-radon
-    # boot
-    { myNixos.boot.loader = "systemd-boot"; }
+    # boot(主机直接选择引导器)
+    self.modules.nixos.systemd-boot
     inputs.home-manager.nixosModules.home-manager
   ];
   ```
@@ -249,7 +249,7 @@ modules/
 
 ## 7. 内容级修正(行为不变)
 
-1. **boot 保持单文件**:`loader.nix` = myNixos.boot 选项 + 引导器分支 + 内核选择(审阅后撤销 kernel 拆分,内核选择本就耦合 systemd-boot 分支)
+1. **boot 拆为两单元、移除 option 机制**:`systemd-boot.nix`(radon,含 latest 内核)+ `grub.nix`(neon,设备由主机内联);主机直接 import,与其余分类统一(无域命名 + 注释分组)
 2. **mtr 拆出** `network/base.nix` → `network/mtr.nix`(与 dae/clash-verge 同域)
 3. **systemPackages 拆出** → `environment/system-packages.nix`;firefox 并入 `programs/browsers/` 成对单元(系统侧)
 4. **virt-manager 保留在 libvirtd.nix**(虚拟化单元内聚;审阅后撤销拆分,radon 只引用 libvirtd)
@@ -294,3 +294,4 @@ modules/
 | clash-verge | 原样保留 |
 | lib/pkgs | 空占位(未来可选项实现落点 lib/) |
 | 审阅修正(2026-08-20) | mtr→network/;gnupg→programs/;virt-manager 并回 libvirtd;firefox 并入 browsers 成对单元;kernel 并回 loader;fd/rg→shell/tools;unzip→programs/utilities;session 保持 |
+| boot option 移除(2026-08-20) | 删除 myNixos.boot 选项机制;boot 拆为 systemd-boot/grub 两单元,主机直接 import(无域命名 + 注释统一) |

@@ -19,8 +19,8 @@
       self.modules.nixos.libvirtd
       # ── host glue ──
       self.modules.nixos.hm-radon
-      # ── boot:core 共享导入,这里只选择引导器(Conditional aspect)──
-      { myNixos.boot.loader = "systemd-boot"; }
+      # ── boot:主机直接选择引导器 ──
+      self.modules.nixos.systemd-boot
       inputs.home-manager.nixosModules.home-manager
     ];
   };
