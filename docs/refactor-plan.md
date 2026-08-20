@@ -52,7 +52,7 @@ modules/
 ├── boot/
 │   └── loader.nix                # 引导器 + 内核选择(myNixos.boot) → nixos.loader
 ├── desktop/
-│   ├── kde/nixos.nix             # KDE: sddm+plasma6+X11 → nixos.kde
+│   ├── kde.nix                   # KDE: sddm+plasma6+X11 → nixos.kde(单侧单元,平铺)
 │   ├── niri/
 │   │   ├── nixos.nix             # → nixos.niri(含 home 桥)
 │   │   ├── home.nix              # → homeManager.niri
