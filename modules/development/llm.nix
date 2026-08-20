@@ -5,6 +5,7 @@
       cc-switch-cli
       hermes-one
       hermes-agent
+      dsh
     ];
   };
 }

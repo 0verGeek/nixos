@@ -6,15 +6,12 @@
       substituters = [
         "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
         "https://mirrors.ustc.edu.cn/nix-channels/store"
-        "https://deepseek-harness-nix.cachix.org"
       ];
       trusted-users = [
         "root"
         "camuss"
       ];
-      trusted-public-keys = [
-        "deepseek-harness-nix.cachix.org-1:5NrkwLN9veNMhiINtU5ZeV4isXFhFsOwn6Ms7J1M+TA="
-      ];
+      trusted-public-keys = [ ];
       experimental-features = [
         "nix-command"
         "flakes"
@@ -26,8 +23,8 @@
     };
 
     # 纯 flake 工作流不需要 channel
-    nix.channel.enable = false;
+    # nix.channel.enable = false;
     # 让 `nix run nixpkgs#<pkg>` 解析到本 flake 锁定的 nixpkgs
-    nix.registry.nixpkgs.flake = inputs.nixpkgs;
+    # nix.registry.nixpkgs.flake = inputs.nixpkgs;
   };
 }

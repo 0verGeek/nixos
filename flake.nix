@@ -9,12 +9,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia.url = "github:noctalia-dev/noctalia/cachix";
-    noctalia.inputs.nixpkgs.follows = "nixpkgs";
-    llm-agents.url = "github:Qumulo/llm-agents";
-    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
-    deepseek-harness.url = "github:moraxyc/deepseek-harness.nix";
-    deepseek-harness.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

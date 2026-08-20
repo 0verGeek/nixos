@@ -14,7 +14,6 @@
           core
           # ── development ──
           direnv
-          dsh
           # ── environment ──
           session
         ];

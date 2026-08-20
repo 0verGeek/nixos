@@ -24,7 +24,6 @@
       settings
       nix-ld
       nh
-      overlays
       # ── programs ──
       browsers
       gnupg
