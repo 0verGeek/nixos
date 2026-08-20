@@ -7,7 +7,6 @@
     imports = with self.modules.nixos; [
       # ── boot ──
       loader
-      kernel
       # ── desktop ──
       kde
       xdg
@@ -23,17 +22,17 @@
       # ── network ──
       base
       dae
+      mtr
       # ── nix ──
       settings
       nix-ld
       nh
       overlays
       # ── programs ──
-      firefox
-      appimage
-      mtr
-      # ── services ──
+      browsers
       gnupg
+      appimage
+      # ── services ──
       pipewire
       power
       printing

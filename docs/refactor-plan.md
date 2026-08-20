@@ -33,7 +33,7 @@
 # modules/core/nixos.nix 中
 imports = with self.modules.nixos; [
   # boot
-  loader kernel
+  loader
   # desktop
   kde xdg
   ...
@@ -50,8 +50,7 @@ modules/
 │   ├── nixos.nix                 # 系统侧共享组合 → nixos.core
 │   └── home.nix                  # 用户侧共享组合 → homeManager.core
 ├── boot/
-│   ├── loader.nix                # 引导器(myNixos.boot) → nixos.loader
-│   └── kernel.nix                # 内核 → nixos.kernel
+│   └── loader.nix                # 引导器 + 内核选择(myNixos.boot) → nixos.loader
 ├── desktop/
 │   ├── kde/nixos.nix             # KDE: sddm+plasma6+X11 → nixos.kde
 │   ├── niri/
@@ -75,14 +74,14 @@ modules/
 │   └── rime.nix                  # → homeManager.rime
 ├── locale.nix                    # → nixos.locale
 ├── network/
-│   ├── base.nix dae.nix(+dae-config.dae) clash-verge.nix(原样)
+│   ├── base.nix dae.nix(+dae-config.dae) clash-verge.nix(原样) mtr.nix
 ├── nix/
 │   ├── settings.nix nix-ld.nix nh.nix overlays.nix
 ├── programs/
-│   ├── browsers.nix editors.nix utilities.nix          # → homeManager.*
-│   ├── firefox.nix appimage.nix mtr.nix virt-manager.nix  # → nixos.*
+│   ├── browsers/{nixos.nix, home.nix}  # 浏览器成对单元(firefox / chrome+folo)
+│   ├── editors.nix utilities.nix gnupg.nix appimage.nix
 ├── services/
-│   ├── pipewire.nix power.nix printing.nix gnupg.nix libvirtd.nix
+│   ├── pipewire.nix power.nix printing.nix libvirtd.nix(含 virt-manager)
 ├── shell/
 │   ├── zsh/{nixos.nix, home.nix} # → nixos.zsh / homeManager.zsh
 │   ├── starship.nix zellij.nix tools.nix wezterm.nix
@@ -95,7 +94,7 @@ modules/
 
 | 现 attr | 新 attr |
 |---|---|
-| `boot` | `loader` + `kernel`(新拆) |
+| `boot` | `loader`(含内核选择,审阅后撤销拆分) |
 | `desktop-plasma` + `desktop-x11` | `kde`(合并) |
 | `desktop-xdg` | `xdg` |
 | `niri` | `niri`(不变,移到 desktop/) |
@@ -113,13 +112,12 @@ modules/
 | `nh` | `nh`(不变) |
 | `overlays` | `overlays`(不变) |
 | `packages`(systemPackages) | `system-packages` |
-| (新)firefox | `firefox` |
+| (新)firefox(并入 browsers 成对单元) | `browsers` |
 | `programs-appimage` | `appimage` |
-| (新)mtr | `mtr` |
-| (新)virt-manager | `virt-manager` |
+| (新)mtr(自 network-base 拆出,归 network/) | `mtr` |
 | `programs-zsh` | `zsh` |
-| `services-gnupg` | `gnupg` |
-| `services-libvirtd` | `libvirtd`(virt-manager 拆出) |
+| `services-gnupg` | `gnupg`(归 programs/,内容是 programs.gnupg.agent) |
+| `services-libvirtd` | `libvirtd`(含 virt-manager,虚拟化单元内聚) |
 | `services-pipewire` | `pipewire` |
 | `services-power` | `power` |
 | `services-printing` | `printing` |
@@ -167,7 +165,7 @@ modules/
   flake.modules.nixos.core = {
     imports = with self.modules.nixos; [
       # boot
-      loader kernel
+      loader
       # desktop
       kde xdg
       # environment
@@ -179,13 +177,13 @@ modules/
       # locale
       locale
       # network
-      base dae
+      base dae mtr
       # nix
       settings nix-ld nh overlays
       # programs
-      firefox appimage mtr
+      browsers gnupg appimage
       # services
-      gnupg pipewire power printing
+      pipewire power printing
       # shell
       zsh
       # users
@@ -240,7 +238,6 @@ modules/
     self.modules.nixos.gpu-nvidia
     # services / virtualisation
     self.modules.nixos.libvirtd
-    self.modules.nixos.virt-manager
     self.modules.nixos.hm-radon
     # boot
     { myNixos.boot.loader = "systemd-boot"; }
@@ -252,10 +249,10 @@ modules/
 
 ## 7. 内容级修正(行为不变)
 
-1. **boot 拆分**:`loader.nix` = myNixos.boot 选项 + 引导器分支;`kernel.nix` = `lib.mkIf (config.myNixos.boot.loader == "systemd-boot")` 的 `linuxPackages_latest`(行为不变:radon 用 latest、neon 用默认内核)
-2. **mtr 拆出** `network/base.nix` → `programs/mtr.nix`
-3. **firefox 拆出** `packages.nix` → `programs/firefox.nix`;systemPackages → `environment/system-packages.nix`
-4. **virt-manager 拆出** `services/libvirtd.nix` → `programs/virt-manager.nix`(radon 同时引用)
+1. **boot 保持单文件**:`loader.nix` = myNixos.boot 选项 + 引导器分支 + 内核选择(审阅后撤销 kernel 拆分,内核选择本就耦合 systemd-boot 分支)
+2. **mtr 拆出** `network/base.nix` → `network/mtr.nix`(与 dae/clash-verge 同域)
+3. **systemPackages 拆出** → `environment/system-packages.nix`;firefox 并入 `programs/browsers/` 成对单元(系统侧)
+4. **virt-manager 保留在 libvirtd.nix**(虚拟化单元内聚;审阅后撤销拆分,radon 只引用 libvirtd)
 5. **shell 拆分**:`shell/zsh.nix` → `shell/zsh/home.nix` + `shell/starship.nix` + `shell/zellij.nix`
 6. **niri 迁移**:`features/niri/` → `desktop/niri/`
 7. **删除** `modules/{nixos,home,features}/`
@@ -296,3 +293,4 @@ modules/
 | 主机硬件 | 移入 hardware/{neon,radon}.nix |
 | clash-verge | 原样保留 |
 | lib/pkgs | 空占位(未来可选项实现落点 lib/) |
+| 审阅修正(2026-08-20) | mtr→network/;gnupg→programs/;virt-manager 并回 libvirtd;firefox 并入 browsers 成对单元;kernel 并回 loader;fd/rg→shell/tools;unzip→programs/utilities;session 保持 |

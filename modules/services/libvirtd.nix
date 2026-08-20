@@ -7,6 +7,8 @@
         runAsRoot = true;
       };
     };
+    programs.virt-manager.enable = true;
+
     boot.kernelModules = [ "kvm-amd" ];
 
     boot.extraModprobeConfig = ''

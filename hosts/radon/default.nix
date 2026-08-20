@@ -17,7 +17,6 @@
       self.modules.nixos.gpu-nvidia
       # ── services / virtualisation ──
       self.modules.nixos.libvirtd
-      self.modules.nixos.virt-manager
       # ── host glue ──
       self.modules.nixos.hm-radon
       # ── boot:core 共享导入,这里只选择引导器(Conditional aspect)──
