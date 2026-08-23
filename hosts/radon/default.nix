@@ -15,6 +15,10 @@
       # ── hardware ──
       self.modules.nixos.radon
       self.modules.nixos.gpu-nvidia
+      # ── desktop ──
+      self.modules.nixos.niri
+      self.modules.nixos.dms
+
       # ── services / virtualisation ──
       self.modules.nixos.libvirtd
       # ── host glue ──

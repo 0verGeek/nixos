@@ -6,9 +6,9 @@
 
       programs.noctalia = {
         enable = true;
-        systemd.enable = true;
+        # systemd.enable = true;
         settings = {
-          launch_apps_as_systemd_services = true;
+          # launch_apps_as_systemd_services = true;
           # This may also be a string or path to a .toml file.
           theme = {
             mode = "dark";
@@ -18,7 +18,7 @@
 
           wallpaper = {
             enabled = true;
-            default.path = "/home/camuss/图片/Violet Evergarden.jpg";
+            # default.path = "/home/camuss/图片/Violet Evergarden.jpg";
           };
         };
       };

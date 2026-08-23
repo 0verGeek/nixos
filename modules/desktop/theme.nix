@@ -3,7 +3,7 @@
     home.packages = with pkgs; [
       papirus-icon-theme
       hicolor-icon-theme
-      qt6Packages.qt6ct
+      kdePackages.qt6ct
       adw-gtk3
       nwg-look
     ];

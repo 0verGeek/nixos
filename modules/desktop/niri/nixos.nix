@@ -12,6 +12,9 @@
       environment.etc."xdg/menus/applications.menu".source =
         "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
+      environment.systemPackages = with pkgs; [
+        xwayland-satellite
+      ];
       # ── 用户侧(经桥注入 home.nix)──
       home-manager.users.camuss.imports = [ self.modules.homeManager.niri ];
     };

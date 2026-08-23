@@ -5,6 +5,7 @@
       uv
       nodejs
       python3
+      pnpm
     ];
 
     programs.uv.enable = true;

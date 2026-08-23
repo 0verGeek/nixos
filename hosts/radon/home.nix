@@ -16,6 +16,9 @@
           direnv
           # ── environment ──
           session
+          # ── desktop ──
+          # noctalia
+
         ];
         programs.home-manager.enable = true;
       };

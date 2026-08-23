@@ -4,7 +4,6 @@
       fastfetch
       font-manager
       glib
-      libsecret
       unzip
     ];
   };
