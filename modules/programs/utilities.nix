@@ -5,6 +5,9 @@
       font-manager
       glib
       unzip
+      prismlauncher
+      blockbench
+      usbutils
     ];
   };
 }

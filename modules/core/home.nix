@@ -18,6 +18,7 @@
       browsers
       editors
       utilities
+      e-book
       # ── shell ──
       starship
       tools

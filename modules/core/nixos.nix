@@ -4,6 +4,8 @@
 { self, ... }: {
   flake.modules.nixos.core = {
     imports = with self.modules.nixos; [
+      # ── kernel ──
+      kernel
       # ── desktop ──
       kde
       xdg
