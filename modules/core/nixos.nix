@@ -21,6 +21,7 @@
       # ── network ──
       base
       dae
+      # clash-verge
       mtr
       # ── nix ──
       settings
@@ -34,6 +35,7 @@
       pipewire
       power
       printing
+      zram
       # ── shell ──
       zsh
       # ── users ──

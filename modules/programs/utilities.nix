@@ -5,9 +5,16 @@
       font-manager
       glib
       unzip
+      unrar
+      p7zip
+      hmcl
       prismlauncher
       blockbench
       usbutils
+      motrix
+      libreoffice
+      supergfxctl
+      qq
     ];
   };
 }

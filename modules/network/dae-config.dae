@@ -10,7 +10,7 @@ global {
 
 subscription {
   # 在下面填入你的订阅链接。
-  feiniaoyun:'https://388583885.459245.xyz/api/v1/client/subscribe?token=0c744f2d2ef5d3e5e6416af11e85ed57'
+  feiniaoyun:'https://34584224.908970.xyz/api/v1/client/subscribe?token=0c744f2d2ef5d3e5e6416af11e85ed57'
 }
 
 # 更多的 DNS 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md

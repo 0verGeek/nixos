@@ -7,6 +7,7 @@
       clang
       dmg2img
       libinput
+      wine
     ];
   };
 }

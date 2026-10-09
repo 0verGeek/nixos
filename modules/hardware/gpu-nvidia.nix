@@ -11,13 +11,27 @@
       # hardware.nvidia.package =
       #   config.boot.kernelPackages.nvidiaPackages.stable;
 
-      # 可选：启用 CUDA / 让 32 位程序能用
-      hardware.nvidia.modesetting.enable = true;
-      hardware.nvidia.powerManagement.enable = true;
       hardware.graphics.enable = true;
+      hardware.graphics.extraPackages = with pkgs; [
+        mesa.drivers
+        # 以及你的 NVIDIA 驱动包
+      ];
       # 需要 32 位支持时
       hardware.graphics.enable32Bit = true;
       # 可选值：true（开源）/ false（专有）
-      hardware.nvidia.open = false;
+      hardware.nvidia = {
+        open = true;
+        modesetting.enable = true;
+        powerManagement.enable = true;
+
+        prime = {
+          offload = {
+            enable = true;
+            enableOffloadCmd = true;
+          };
+          amdgpuBusId = "PCI:65:0:0"; # 替换为实际值
+          nvidiaBusId = "PCI:1:0:0"; # 替换为实际值
+        };
+      };
     };
 }
